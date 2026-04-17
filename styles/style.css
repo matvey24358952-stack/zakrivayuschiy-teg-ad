@@ -41,9 +41,8 @@
 
 /* Главный заголовок </HTML> — сделал моноширинным, как код и есть */
 .header__title {
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-  font-weight: 700;
-  font-size: clamp(49px, 1.5vw + 43.3px, 65px); /* адаптивный размер */
+  font-family: var(--accent-font);
+  font-size: clamp(49px, 1.5vw + 43.3px, 65px);
   line-height: 1.1;
   margin-bottom: 20px;
 }
@@ -270,11 +269,9 @@
   padding: 15px 19px;
   display: flex;
   gap: 8px;
-  font-family: 'Courier New', 'VT323', monospace;
+  font-family: "Press Start 2P", cursive;
   font-size: 14px;
   line-height: 1;
-  font-weight: bold;
-  letter-spacing: 1px;
 }
 
 /* Адаптив для узких экранов (до 375px) */
