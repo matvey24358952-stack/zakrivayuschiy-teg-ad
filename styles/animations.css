@@ -1,11 +1,317 @@
-/* Опишите в этом файле все keyframes для проекта и стили анимаций иконки Like.
+/* Стили для кнопки-иконки с сердечком */
+.card__icon-button {
+  background: transparent;
+  border: none; /* убираю рамку, чтобы была просто иконка */
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 4px;
+}
 
-Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
+/* Все кадры анимации по умолчанию скрыты — показываю только нужные в нужный момент */
+.like-icon .frame {
+  opacity: 0;
+}
 
-*/
+/* Показываем обычное состояние сердечка (когда не лайкнуто, не наведено, не в режиме "hover-to-liked") */
+.card__icon-button:not(.is-liked):not(:hover):not(.is-hover-to-liked)
+  .frame-default {
+  opacity: 1;
+}
+
+/* анимация при наведение сердечко еще не лайкнуто */
+/* Первая фаза наведения */
+.like-icon:not(.is-liked):hover .frame-hover-1 {
+  animation: hover-stage-1 0.3s forwards;
+}
+/* Вторая фаза наведения */
+.like-icon:not(.is-liked):hover .frame-hover-2 {
+  animation: hover-stage-2 0.3s forwards;
+}
+/* Третья фаза наведения — остаётся видимой */
+.like-icon:not(.is-liked):hover .frame-hover-3 {
+  animation: hover-stage-3 0.3s forwards;
+}
+
+@keyframes hover-stage-1 {
+  0%,
+  33.3% {
+    opacity: 1;
+  }
+  33.31%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes hover-stage-2 {
+  0%,
+  33.3% {
+    opacity: 0;
+  }
+  33.31%,
+  66.6% {
+    opacity: 1;
+  }
+  66.61%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes hover-stage-3 {
+  0%,
+  66.6% {
+    opacity: 0;
+  }
+  66.61%,
+  100% {
+    opacity: 1;
+  } /* Остается на 3-й стадии ховера */
+}
+
+/* анимация поставки лайка (6 фаз, длится 0.6 секунды) ===== */
+.is-liked .frame-like-1 {
+  animation: like-stage-1 0.6s forwards;
+}
+.is-liked .frame-like-2 {
+  animation: like-stage-2 0.6s forwards;
+}
+.is-liked .frame-like-3 {
+  animation: like-stage-3 0.6s forwards;
+}
+.is-liked .frame-like-4 {
+  animation: like-stage-4 0.6s forwards;
+}
+.is-liked .frame-like-5 {
+  animation: like-stage-5 0.6s forwards;
+}
+.is-liked .frame-like-6 {
+  animation: like-stage-6 0.6s forwards;
+}
+
+/* Если сердечко лайкнуто и на него нажали (active) — показываем спецкадр */
+.is-liked:active .frame-hover-to-like-3 {
+  opacity: 1;
+}
+
+/* ===== АНИМАЦИЯ СНЯТИЯ ЛАЙКА (обратная анимация, быстрее — 0.3 секунды) ===== */
+.is-liked.is-unliking .frame-like-6 {
+  animation: unlike-stage-6 0.3s forwards;
+}
+.is-liked.is-unliking .frame-like-5 {
+  animation: unlike-stage-5 0.3s forwards;
+}
+.is-liked.is-unliking .frame-like-4 {
+  animation: unlike-stage-4 0.3s forwards;
+}
+.is-liked.is-unliking .frame-like-3 {
+  animation: unlike-stage-3 0.3s forwards;
+}
+.is-liked.is-unliking .frame-like-2 {
+  animation: unlike-stage-2 0.3s forwards;
+}
+.is-liked.is-unliking .frame-like-1 {
+  animation: unlike-stage-1 0.3s forwards;
+}
+
+/* Ключевые кадры для лайка — каждый кадр включается на 1/6 времени (16.6%) */
+@keyframes like-stage-1 {
+  0%,
+  16.6% {
+    opacity: 1;
+  }
+  16.61%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes like-stage-2 {
+  0%,
+  16.6% {
+    opacity: 0;
+  }
+  16.61%,
+  33.3% {
+    opacity: 1;
+  }
+  33.31%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes like-stage-3 {
+  0%,
+  33.3% {
+    opacity: 0;
+  }
+  33.31%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes like-stage-4 {
+  0%,
+  50% {
+    opacity: 0;
+  }
+  50.01%,
+  66.6% {
+    opacity: 1;
+  }
+  66.61%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes like-stage-5 {
+  0%,
+  66.6% {
+    opacity: 0;
+  }
+  66.61%,
+  83.3% {
+    opacity: 1;
+  }
+  83.31%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes like-stage-6 {
+  0%,
+  83.3% {
+    opacity: 0;
+  }
+  83.31%,
+  100% {
+    opacity: 1;
+  } /* В конце сердце остается закрашенным */
+}
+
+/* Ключевые кадры для снятия лайка — идут в обратном порядке */
+@keyframes unlike-stage-6 {
+  0%,
+  16.6% {
+    opacity: 1;
+  }
+  16.61%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes unlike-stage-5 {
+  0%,
+  16.6% {
+    opacity: 0;
+  }
+  16.61%,
+  33.3% {
+    opacity: 1;
+  }
+  33.31%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes unlike-stage-4 {
+  0%,
+  33.3% {
+    opacity: 0;
+  }
+  33.31%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes unlike-stage-3 {
+  0%,
+  50% {
+    opacity: 0;
+  }
+  50.01%,
+  66.6% {
+    opacity: 1;
+  }
+  66.61%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes unlike-stage-2 {
+  0%,
+  66.6% {
+    opacity: 0;
+  }
+  66.61%,
+  83.3% {
+    opacity: 1;
+  }
+  83.31%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes unlike-stage-1 {
+  0%,
+  83.3% {
+    opacity: 0;
+  }
+  83.31%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* анимация при наведение на уже лайкнутое сердечко */
+.is-liked:hover .frame-hover-to-like-1 {
+  animation: to-like-stage-1 0.3s forwards;
+}
+.is-liked:hover .frame-hover-to-like-2 {
+  animation: to-like-stage-2 0.3s forwards;
+}
+.is-liked:hover .frame-hover-to-like-3 {
+  animation: to-like-stage-3 0.3s forwards;
+}
+
+@keyframes to-like-stage-1 {
+  0%,
+  33.3% {
+    opacity: 1;
+  }
+  33.31%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes to-like-stage-2 {
+  0%,
+  33.3% {
+    opacity: 0;
+  }
+  33.31%,
+  66.6% {
+    opacity: 1;
+  }
+  66.61%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes to-like-stage-3 {
+  0%,
+  66.6% {
+    opacity: 0;
+  }
+  66.61%,
+  100% {
+    opacity: 1;
+  }
+}
