@@ -1,1 +1,1 @@
-https://matvey24358952-stack.github.io/zakrivayuschiy-teg-ad/
+.
